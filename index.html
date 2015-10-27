@@ -47,7 +47,13 @@
       <span> Chipotle locations near </span>
       <span>{{zipcode}}</span>
     </h4>
-  </div><!-- end div ng-show="chipotleData.length>0" -->
+  </div><!-- end div ng-show -->
+
+  <!-- Display that no locations were found if a zipcode was entered -->
+  <div ng-show="chipotleData.length==0 && zipcode.length>0">
+    <h4>No Chipotle locations were found near <span>{{zipcode}}</span>
+    </h4>
+  </div><!-- end div ng-show -->
 
   <!-- Google Maps element showing locations -->
   <div id="map_canvas">

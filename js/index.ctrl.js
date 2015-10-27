@@ -10,24 +10,33 @@ angular.module('app').controller('ChipotleMapController', function($scope, Chipo
     zoom: 11
   };
 
-  // Search for locations with zipcode and place in chipotleData
-  // Center the map using the latitude and longitude of the first location
-  $scope.searchLocations = function () {
-    // initialize chipotleData and map center in case no locations found
+  // Initialize search data
+  $scope.initializeSearch = function() {
     $scope.chipotleData = [];
     $scope.map.center = {
       latitude: 40,
       longitude: -73
     };
+
+  };
+
+  // Search for locations with zipcode and place in chipotleData
+  // Center the map using the latitude and longitude of the first location
+  $scope.searchLocations = function () {
+
     ChipotleService.getLocations($scope.zipcode).then(function(data) {
-      if (data.length > 0) {
-        if (typeof data[0].address != "undefined") {
+      // function might return no data, or data that does not contain address objects
+      if (data.length > 0 && (typeof data[0].address != "undefined"))  {
           $scope.chipotleData=data;
           $scope.map.center = {
             latitude: $scope.chipotleData[0].address.latitude,
             longitude: $scope.chipotleData[0].address.longitude
           };
-        }
+
+      }
+      else {
+        // initialize search data if  no locations found
+        $scope.initializeSearch();
       }
 
     });

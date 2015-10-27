@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+  <title>Chipotle Mapper</title>
+
+  <!-- Bootstrap -->
+  <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootswatch CSS file -->
+  <link href="css/bootswatch.paper.css" rel="stylesheet">
+  <!-- Custom CSS file -->
+  <link href="css/custom.css" rel="stylesheet">
+
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body ng-controller="ChipotleMapController">
+
+    <!-- Input group for search button and search box -->
+  <div class="input-group">
+    <!--Search button-->
+    <span class="input-group-btn">
+      <button class="btn btn-success" type="button" ng-click="searchLocations()">
+        <span class="glyphicon glyphicon-search"></span>
+        Find Chipotle Locations
+      </button>
+    </span>
+    <!--Search box-->
+    <input type="text" class="form-control" ng-model="zipcode" placeholder="Enter zipcode to search for Chipotle locations">
+  </div><!-- end input-group -->
+
+  <!-- Display number of locations and map only if locations found-->
+  <div ng-show="chipotleData.length>0">
+
+    <!-- Display number of locations found and zipcode -->
+    <h4>Found
+      <span>{{chipotleData.length}}</span>
+      <span> Chipotle locations near </span>
+      <span>{{zipcode}}</span>
+    </h4>
+  </div><!-- end div ng-show="chipotleData.length>0" -->
+
+  <!-- Google Maps element showing locations -->
+  <div id="map_canvas">
+    <ui-gmap-google-map center='map.center' zoom='map.zoom'>
+      <ui-gmap-markers models="chipotleData" coords="'address'"></ui-gmap-markers>
+    </ui-gmap-google-map>
+  </div><!-- end id="map_canvas" -->
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <script src="bower_components/lodash/lodash.js" type="text/javascript"></script>
+  <script src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+  <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="bower_components/angular/angular.js" type="text/javascript"></script>
+  <script src="bower_components/angular-simple-logger/dist/angular-simple-logger.js" type="text/javascript"></script>
+  <script src="bower_components/angular-google-maps/dist/angular-google-maps.js" type="text/javascript"></script>
+  <script src="js/app.js" type="text/javascript"></script>
+  <script src="js/index.ctrl.js" type="text/javascript"></script>
+  <script src="js/chipotle.service.js" type="text/javascript"></script>
+</body>
+
+</html>

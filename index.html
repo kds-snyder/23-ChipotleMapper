@@ -38,14 +38,10 @@
     <input type="text" class="form-control" ng-model="inputZipcode" placeholder="Enter zipcode to search for Chipotle locations">
   </div><!-- end input-group -->
 
-  <!-- Display number of locations and map only if locations found-->
+  <!-- Display number of locations only if locations found-->
   <div ng-show="chipotleData.length>0">
-    <!-- Display number of locations found and zipcode -->
-    <h4>Found
-      <span>{{chipotleData.length}}</span>
-      <span> Chipotle locations near </span>
-      <span>{{displayZipcode}}</span>
-    </h4>
+    <!-- Display number of locations found near zipcode -->
+    <h4>Found {{chipotleData.length}} Chipotle locations near {{displayZipcode}}</h4>
   </div><!-- end div ng-show -->
 
   <!-- Display that no locations were found if a zipcode was entered and searched -->
@@ -60,6 +56,17 @@
       <ui-gmap-markers models="chipotleData" coords="'address'"></ui-gmap-markers>
     </ui-gmap-google-map>
   </div><!-- end id="map_canvas" -->
+
+  <!-- Display list of locations only if locations found-->
+  <p></p>
+  <div ng-show="chipotleData.length>0">
+    <ul ng-repeat="data in chipotleData">
+      <li ><span>{{data.address.streetNumber}} {{data.address.streetName}}, </span>
+           <span>{{data.address.city}}, {{data.address.administrativeLevels.level1short}} </span>
+           <span>{{data.address.zipcode}}</span>
+     </li>
+    </ul>
+  </div><!-- end div ng-show -->
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <!-- Include all compiled plugins (below), or include individual files as needed -->

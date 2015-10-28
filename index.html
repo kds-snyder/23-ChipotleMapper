@@ -35,23 +35,22 @@
       </button>
     </span>
     <!--Search box-->
-    <input type="text" class="form-control" ng-model="zipcode" placeholder="Enter zipcode to search for Chipotle locations">
+    <input type="text" class="form-control" ng-model="inputZipcode" placeholder="Enter zipcode to search for Chipotle locations">
   </div><!-- end input-group -->
 
   <!-- Display number of locations and map only if locations found-->
   <div ng-show="chipotleData.length>0">
-
     <!-- Display number of locations found and zipcode -->
     <h4>Found
       <span>{{chipotleData.length}}</span>
       <span> Chipotle locations near </span>
-      <span>{{zipcode}}</span>
+      <span>{{displayZipcode}}</span>
     </h4>
   </div><!-- end div ng-show -->
 
-  <!-- Display that no locations were found if a zipcode was entered -->
-  <div ng-show="chipotleData.length==0 && zipcode.length>0">
-    <h4>No Chipotle locations were found near <span>{{zipcode}}</span>
+  <!-- Display that no locations were found if a zipcode was entered and searched -->
+  <div ng-show="chipotleData.length==0 && inputZipcode.length>0 && inputZipcode == displayZipcode">
+    <h4>No Chipotle locations were found near <span>{{displayZipcode}}</span>
     </h4>
   </div><!-- end div ng-show -->
 
